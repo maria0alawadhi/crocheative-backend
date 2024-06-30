@@ -1,4 +1,8 @@
 {
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
   "dependencies": {
     "@ngneat/falso": "^7.2.0",
     "bcrypt": "^5.1.1",
