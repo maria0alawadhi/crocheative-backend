@@ -52,20 +52,12 @@ const verifyToken = (req, res, next) => {
   }
 }
 
-const isAdmin=(req, res, next)=>{
-  const role =  res.locals.payload.type
-  if (role === "admin"){
-      next()
-  }else{
-    res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
-  }
-}
+const roleCheck = (allowedRoles) => (req, res, next) => {
+  const role = res.locals.payload.role;
 
-const isClient=(req, res, next)=>{
-  const role =  res.locals.payload.type
-  if (role === "client"){
-      next()
-  }else{
+  if (allowedRoles.includes(role)) {
+    next()
+  } else {
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
   }
 }
@@ -75,6 +67,5 @@ module.exports = {
   createToken,
   stripToken,
   verifyToken,
-  isAdmin,
-  isClient
+  roleCheck
 }
