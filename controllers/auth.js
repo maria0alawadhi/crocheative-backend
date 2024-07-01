@@ -35,7 +35,7 @@ const Login = async (req, res) => {
 
     if (matched) {
       let payload = {
-        id: user.id,
+        id: user._id,
         email: user.email,
         role: user.role
       }
@@ -67,7 +67,6 @@ const UpdatePassword = async (req, res) => {
       let payload = {
         id: user.id,
         email: user.email,
-        role: user.role
       }
       return res.send({ status: 'Password Updated!', user: payload })
     }
