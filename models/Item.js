@@ -1,5 +1,4 @@
 const { Schema } = require('mongoose')
-
 const itemSchema = new Schema(
   {
     category: String,
@@ -11,5 +10,4 @@ const itemSchema = new Schema(
   },
   { timestamps: true }
 )
-
 module.exports = itemSchema
