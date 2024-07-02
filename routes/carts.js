@@ -1,17 +1,21 @@
-const express = require('express')
-const {
-  addItemInCart,
-  deleteItemInCart,
-  getCartItems
-} = require('../controller/cart.controller')
-const { verifyUser } = require('../middleware/middleware')
-const router = express.Router()
+const router = require('express').Router()
+const controller = require('../controllers/carts')
+const middleware = require('../middleware')
 
-router
-  .route('/')
-  .get([verifyUser], getCartItems)
-  .post([verifyUser], addItemInCart)
-
-router.route('/:id').delete([verifyUser], deleteItemInCart)
+// router.get('/', controller.addItemInCart) post
+// router.get('/:item_id', controller.deleteItemInCart)
+router.get('/cart/:itemId', controller.getCartItems)
+router.post(
+  '/cart',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.CreatePost
+)
+router.delete(
+  '/cart/:itemId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.DeletePost
+)
 
 module.exports = router

@@ -44,7 +44,7 @@ const deleteReview = async (req, res) => {
   try {
     await Review.deleteOne({ _id: req.params.review_id })
     //delete the reference
-    await Item.findByIdAndUpdate(req.params.post_id, {
+    await Item.findByIdAndUpdate(req.params.item_id, {
       $pull: { reviews: req.params.review_id }
     })
     res.send({
