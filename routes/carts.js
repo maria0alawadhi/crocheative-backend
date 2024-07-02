@@ -3,7 +3,7 @@ const {
   addItemInCart,
   deleteItemInCart,
   getCartItems
-} = require('../controller/cart.controller')
+} = require('../controller/carts')
 const { verifyUser } = require('../middleware/middleware')
 const router = express.Router()
 

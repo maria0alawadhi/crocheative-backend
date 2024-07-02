@@ -1,13 +1,11 @@
 var express = require('express')
 var router = express.Router()
-const ReviewCtrl = require('../controllers/review')
+const ReviewCtrl = require('../controllers/reviews')
 const middleware = require('../middleware')
 
 //show all reviews
 router.get(
   '/items/:item_id/reviews',
-  middleware.stripToken,
-  middleware.verifyToken,
   ReviewCtrl.index
 )
 //create new review
