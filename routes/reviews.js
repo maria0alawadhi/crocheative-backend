@@ -1,5 +1,4 @@
-var express = require('express')
-var router = express.Router()
+const router = require('express').Router()
 const ReviewCtrl = require('../controllers/review')
 const middleware = require('../middleware')
 
