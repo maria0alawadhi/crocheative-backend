@@ -1,6 +1,4 @@
-const mongodb = require('mongodb')
-const { Review } = require('../models')
-const { Item } = require('../models')
+const { Review, Item } = require('../models/Index')
 
 const index = async (req, res) => {
   try {
@@ -28,7 +26,7 @@ const create = async (req, res) => {
 const updateReview = async (req, res) => {
   try {
     const review = await Review.findByIdAndUpdate(
-      req.params.review_id,
+      req.params.reviewId,
       req.body,
       {
         new: true
@@ -42,14 +40,14 @@ const updateReview = async (req, res) => {
 
 const deleteReview = async (req, res) => {
   try {
-    await Review.deleteOne({ _id: req.params.review_id })
+    await Review.deleteOne({ _id: req.params.reviewId })
     //delete the reference
-    await Item.findByIdAndUpdate(req.params.item_id, {
-      $pull: { reviews: req.params.review_id }
+    await Item.findByIdAndUpdate(req.params.itemId, {
+      $pull: { reviews: req.params.reviewId }
     })
     res.send({
       msg: 'Review Deleted',
-      payload: req.params.review_id,
+      payload: req.params.reviewId,
       status: 'Ok'
     })
   } catch (error) {

@@ -7,13 +7,13 @@ router.post(
   '/cart',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.CreatePost
+  controller.addItemInCart
 )
 router.delete(
   '/cart/:itemId',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.DeletePost
+  controller.deleteItemInCart
 )
 
 module.exports = router

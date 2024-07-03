@@ -13,7 +13,7 @@ const cartSchema = new Schema(
       required: true
     },
     count: {
-      type: String,
+      type: Number,
       required: true
     }
   },
