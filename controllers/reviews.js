@@ -13,7 +13,7 @@ const create = async (req, res) => {
   try {
     const review = await Review.create(req.body)
     // adding the review to the Item
-    const item = await Item.findById(req.params.item_id)
+    const item = await Item.findById(req.params.itemId)
     item.reviews.push(review._id)
     await item.save()
 
