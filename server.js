@@ -4,7 +4,7 @@ const cors = require('cors')
 
 const AuthRouter = require('./routes/auth')
 const itemsRouter = require('./routes/items')
-const cartsRouter = require('./routes/carts')
+const ordersRouter = require('./routes/orders')
 const reviewsRouter = require('./routes/reviews')
 
 const PORT = process.env.PORT || 3001
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/auth', AuthRouter)
 app.use('/', itemsRouter)
-app.use('/', cartsRouter)
+app.use('/', ordersRouter)
 app.use('/', reviewsRouter)
 
 app.use('/', (req, res) => {
