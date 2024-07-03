@@ -4,28 +4,28 @@ const middleware = require('../middleware')
 
 //show all reviews
 router.get(
-  '/items/:item_id/reviews',
+  '/items/:itemId/reviews',
   middleware.stripToken,
   middleware.verifyToken,
   ReviewCtrl.index
 )
 //create new review
 router.post(
-  '/items/:item_id/reviews',
+  '/items/:itemId/reviews',
   middleware.stripToken,
   middleware.verifyToken,
   ReviewCtrl.create
 )
 // update a review
 router.put(
-  '/items/:item_id/reviews/:review_id',
+  '/items/:itemId/reviews/:reviewId',
   middleware.stripToken,
   middleware.verifyToken,
   ReviewCtrl.update
 )
 //delete a review
 router.delete(
-  '/items/:item_id/reviews/:review_id',
+  '/items/:itemId/reviews/:reviewId',
   middleware.stripToken,
   middleware.verifyToken,
   ReviewCtrl.delete
