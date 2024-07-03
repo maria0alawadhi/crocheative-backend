@@ -1,6 +1,4 @@
-const mongodb = require('mongodb')
-const { Review } = require('../models')
-const { Item } = require('../models')
+const { Item, Review } = require('../models/Index')
 
 const index = async (req, res) => {
   try {
