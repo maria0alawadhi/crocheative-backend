@@ -66,7 +66,7 @@ const UpdatePassword = async (req, res) => {
       })
       let payload = {
         id: user.id,
-        email: user.email,
+        email: user.email
       }
       return res.send({ status: 'Password Updated!', user: payload })
     }
