@@ -1,4 +1,4 @@
-const { Item, Review } = require('../models/Index')
+const { Review, Item } = require('../models/Index')
 
 const index = async (req, res) => {
   try {
@@ -13,7 +13,7 @@ const create = async (req, res) => {
   try {
     const review = await Review.create(req.body)
     // adding the review to the Item
-    const item = await Item.findById(req.params.item_id)
+    const item = await Item.findById(req.params.itemId)
     item.reviews.push(review._id)
     await item.save()
 
@@ -26,7 +26,7 @@ const create = async (req, res) => {
 const updateReview = async (req, res) => {
   try {
     const review = await Review.findByIdAndUpdate(
-      req.params.review_id,
+      req.params.reviewId,
       req.body,
       {
         new: true
@@ -40,14 +40,14 @@ const updateReview = async (req, res) => {
 
 const deleteReview = async (req, res) => {
   try {
-    await Review.deleteOne({ _id: req.params.review_id })
+    await Review.deleteOne({ _id: req.params.reviewId })
     //delete the reference
-    await Item.findByIdAndUpdate(req.params.item_id, {
-      $pull: { reviews: req.params.review_id }
+    await Item.findByIdAndUpdate(req.params.itemId, {
+      $pull: { reviews: req.params.reviewId }
     })
     res.send({
       msg: 'Review Deleted',
-      payload: req.params.review_id,
+      payload: req.params.reviewId,
       status: 'Ok'
     })
   } catch (error) {
