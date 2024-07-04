@@ -1,45 +1,59 @@
 const { Order } = require('../models/Index')
 
-const getOrderItems = async (req, res) => {
+const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ user: req.user._id }).populate('items')
-    res.status(200).send({ status: 'ok', orders })
-  } catch (err) {
-    console.log(err)
-    sendResponseError(500, `Error ${err}`, res)
+    const orders = await Order.find().populate('items')
+    res.send(orders)
+  } catch (error) {
+    throw error
   }
 }
-const addItemInOrder = async (req, res) => {
-  const { item } = req.body
+
+const getUserOrders = async (req, res) => {
   try {
-    let order = await Order.findOne({ userId: req.user._id })
-    if (!order) {
-      order = new Order({ userId: req.user._id, items: [item] })
-    } else {
-      order.items.push(item)
-    }
-    console.log(order)
-    await order.save()
-    res.status(201).send({ status: 'ok', order })
-  } catch (err) {
-    console.log(err)
-    sendResponseError(500, `Error ${err}`, res)
+    const { userId } = req.params
+    const orders = await Order.find({ user: userId }).populate('items')
+    res.send(orders)
+  } catch (error) {
+    throw error
   }
 }
+
+const createOrder = async (req, res) => {
+  try {
+    const { user, items } = req.body
+    const newOrder = new Order({ user: user, items })
+    const savedOrder = await newOrder.save()
+    res.send(savedOrder)
+  } catch (error) {
+    throw error
+  }
+}
+
 const deleteItemInOrder = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id)
-    if (!order) {
-      return res
-        .status(404)
-        .send({ status: 'error', message: 'Order not found' })
+    const { orderId, itemId } = req.params
+
+    const updatedOrder = await Order.findOneAndUpdate(
+      { _id: orderId, items: itemId },
+      { $pull: { items: itemId } },
+      { new: true }
+    )
+
+    if (updatedOrder.items.length === 0) {
+      await Order.deleteOne({ _id: orderId })
+      res.send({ message: 'Order deleted' })
+    } else {
+      res.send(updatedOrder)
     }
-    order.items.pull(req.params.itemId)
-    await order.save()
-    res.status(200).send({ status: 'ok' })
-  } catch (err) {
-    console.log(err)
-    sendResponseError(500, `Error ${err}`, res)
+  } catch (error) {
+    throw error
   }
 }
-module.exports = { addItemInOrder, deleteItemInOrder, getOrderItems }
+
+module.exports = {
+  getAllOrders,
+  getUserOrders,
+  createOrder,
+  deleteItemInOrder
+}

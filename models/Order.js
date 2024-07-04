@@ -11,7 +11,7 @@ const orderSchema = new Schema(
     payment: {
       type: Boolean,
       required: true,
-      default: false
+      default:false
     }
   },
   { timestamps: true }
