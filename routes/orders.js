@@ -1,19 +1,34 @@
 const router = require('express').Router()
-const controller = require('../controllers/orders')
+const orderCtrl = require('../controllers/orders')
 const middleware = require('../middleware')
 
-router.get('/order/:itemId', controller.getOrderItems)
-router.post(
-  '/order',
+router.get(
+  '/orders',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.addItemInOrder
+  middleware.roleCheck(['admin']),
+  orderCtrl.getAllOrders
+)
+router.get(
+  '/orders/:userId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  middleware.roleCheck(['client']),
+  orderCtrl.getUserOrders
+)
+router.post(
+  '/orders',
+  middleware.stripToken,
+  middleware.verifyToken,
+  middleware.roleCheck(['client']),
+  orderCtrl.createOrder
 )
 router.delete(
-  '/order/:itemId',
+  '/orders/:orderId/items/:itemId',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.deleteItemInOrder
+  middleware.roleCheck(['client']),
+  orderCtrl.deleteItemInOrder
 )
 
 module.exports = router

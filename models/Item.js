@@ -6,7 +6,8 @@ const itemSchema = new Schema(
     description: String,
     price: Number,
     countInStock: Number,
-    imgs: [String]
+    imgs: [String],
+    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
   },
   { timestamps: true }
 )
