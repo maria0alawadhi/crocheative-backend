@@ -12,11 +12,9 @@ const index = async (req, res) => {
 const create = async (req, res) => {
   try {
     const review = await Review.create(req.body)
-    // adding the review to the Item
     const item = await Item.findById(req.params.itemId)
     item.reviews.push(review._id)
     await item.save()
-
     res.send(review)
   } catch (error) {
     throw error
@@ -41,7 +39,6 @@ const updateReview = async (req, res) => {
 const deleteReview = async (req, res) => {
   try {
     await Review.deleteOne({ _id: req.params.reviewId })
-    //delete the reference
     await Item.findByIdAndUpdate(req.params.itemId, {
       $pull: { reviews: req.params.reviewId }
     })
