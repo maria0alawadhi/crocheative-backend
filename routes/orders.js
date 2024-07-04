@@ -1,19 +1,13 @@
 const router = require('express').Router()
-const controller = require('../controllers/orders')
+const orderCtrl = require('../controllers/orders')
 const middleware = require('../middleware')
-
-router.get('/order/:itemId', controller.getOrderItems)
+router.get('/order', orderCtrl.getOrderItems)
 router.post(
   '/order',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.addItemInOrder
+  orderCtrl.addItemInOrder
 )
 router.delete(
   '/order/:itemId',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.deleteItemInOrder
+  orderCtrl.deleteItemInOrder
 )
-
 module.exports = router

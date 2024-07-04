@@ -2,24 +2,24 @@ const { Order } = require('../models/Index')
 
 const getOrderItems = async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.user._id }).populate('items')
-    // console.log(orders)
+    const orders = await Order.find({ user: req.user._id }).populate('items')
     res.status(200).send({ status: 'ok', orders })
   } catch (err) {
     console.log(err)
     sendResponseError(500, `Error ${err}`, res)
   }
 }
-
 const addItemInOrder = async (req, res) => {
-  const { itemId, count } = req.body
+  const { item } = req.body
   try {
-    const order = await Order.findOneAndUpdate(
-      { itemId },
-      { itemId, count, userId: req.user._id },
-      { upsert: true }
-    )
-
+    let order = await Order.findOne({ userId: req.user._id })
+    if (!order) {
+      order = new Order({ userId: req.user._id, items: [item] })
+    } else {
+      order.items.push(item)
+    }
+    console.log(order)
+    await order.save()
     res.status(201).send({ status: 'ok', order })
   } catch (err) {
     console.log(err)
@@ -28,9 +28,16 @@ const addItemInOrder = async (req, res) => {
 }
 const deleteItemInOrder = async (req, res) => {
   try {
-    await Order.findByIdAndRemove(req.params.id)
+    const order = await Order.findById(req.params.id)
+    if (!order) {
+      return res
+        .status(404)
+        .send({ status: 'error', message: 'Order not found' })
+    }
+    order.items.pull(req.params.itemId)
+    await order.save()
     res.status(200).send({ status: 'ok' })
-  } catch (e) {
+  } catch (err) {
     console.log(err)
     sendResponseError(500, `Error ${err}`, res)
   }
