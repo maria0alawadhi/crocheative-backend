@@ -3,6 +3,7 @@ const itemCtrl = require('../controllers/items')
 const middleware = require('../middleware')
 
 router.get('/', itemCtrl.getAllItems)
+router.get('/categories', itemCtrl.getDistinctCategories )
 router.get('/:categoryName/items', itemCtrl.getItemsByCategory)
 router.post(
   '/:categoryName/items',

@@ -1,6 +1,18 @@
 const { Item } = require('../models/Index')
 const middleware = require('../middleware')
 
+
+
+
+const getDistinctCategories = async (req, res) => {
+  try {
+    const categoryNames = await Item.distinct('category')
+    res.send(categoryNames)
+  } catch (error) {
+    throw error
+  }
+}
+
 //getAllitems
 const getAllItems = async (req, res) => {
   try {
@@ -68,6 +80,7 @@ const deleteItem = async (req, res) => {
 }
 
 module.exports = {
+  getDistinctCategories,
   getAllItems,
   getItemsByCategory,
   getItemById,
