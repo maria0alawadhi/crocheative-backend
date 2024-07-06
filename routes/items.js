@@ -2,9 +2,10 @@ const router = require('express').Router()
 const itemCtrl = require('../controllers/items')
 const middleware = require('../middleware')
 
-router.get('/', itemCtrl.getAllItems)
-router.get('/categories', itemCtrl.getDistinctCategories )
+router.get('/items', itemCtrl.getAllItems)
+router.get('/categories', itemCtrl.getDistinctCategories)
 router.get('/:categoryName/items', itemCtrl.getItemsByCategory)
+router.get('/:categoryName/items/:itemId', itemCtrl.getItemById)
 router.post(
   '/:categoryName/items',
   middleware.stripToken,
