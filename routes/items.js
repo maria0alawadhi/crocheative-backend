@@ -7,21 +7,21 @@ router.get('/categories', itemCtrl.getDistinctCategories)
 router.get('/:categoryName/items', itemCtrl.getItemsByCategory)
 router.get('/:categoryName/items/:itemId', itemCtrl.getItemById)
 router.post(
-  '/:categoryName/items',
+  '/items',
   middleware.stripToken,
   middleware.verifyToken,
   middleware.roleCheck(['admin']),
   itemCtrl.createItem
 )
 router.delete(
-  '/:categoryName/items/:itemId',
+  '/items/:itemId',
   middleware.stripToken,
   middleware.verifyToken,
   middleware.roleCheck(['admin']),
   itemCtrl.deleteItem
 )
 router.put(
-  '/:categoryName/items/:itemId',
+  '/items/:itemId',
   middleware.stripToken,
   middleware.verifyToken,
   middleware.roleCheck(['admin']),
