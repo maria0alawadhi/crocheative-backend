@@ -5,8 +5,8 @@ const middleware = require('../middleware')
 //show all reviews
 router.get(
   '/:itemId/reviews',
-  // middleware.stripToken,
-  // middleware.verifyToken,
+  middleware.stripToken,
+  middleware.verifyToken,
   ReviewCtrl.index
 )
 //create new review

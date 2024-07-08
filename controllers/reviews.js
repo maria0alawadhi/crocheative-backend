@@ -2,13 +2,13 @@ const { Review, Item } = require('../models/Index')
 
 const index = async (req, res) => {
   try {
-    const reviews = await Review.find()
+    const reviews = await Review.find({ user: res.locals.payload.id })
     res.send(reviews)
   } catch (error) {
     throw error
   }
 }
-// { user: res.locals.payload.id }
+
 const create = async (req, res) => {
   try {
     const review = await Review.create(req.body)
