@@ -1,5 +1,4 @@
 const { Schema } = require('mongoose')
-
 const orderSchema = new Schema(
   {
     user: {
@@ -17,5 +16,4 @@ const orderSchema = new Schema(
   },
   { timestamps: true }
 )
-
 module.exports = orderSchema
