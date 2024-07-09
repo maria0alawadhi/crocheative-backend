@@ -9,6 +9,7 @@ router.get(
   middleware.roleCheck(['admin']),
   orderCtrl.getAllOrders
 )
+
 router.get(
   '/orders/:userId',
   middleware.stripToken,

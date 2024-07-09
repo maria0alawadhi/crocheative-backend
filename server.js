@@ -2,6 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
 
+
 const AuthRouter = require('./routes/auth')
 const itemsRouter = require('./routes/items')
 const ordersRouter = require('./routes/orders')
@@ -24,7 +25,7 @@ app.use('/', ordersRouter)
 app.use('/', reviewsRouter)
 
 app.use('/', (req, res) => {
-  res.send(`Connected!`)
+  res.send(`Connected to Crocheative!`)
 })
 
 app.listen(PORT, () => {
