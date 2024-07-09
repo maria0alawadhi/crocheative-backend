@@ -31,5 +31,4 @@ router.delete(
   middleware.roleCheck(['client']),
   orderCtrl.deleteItemInOrder
 )
-
 module.exports = router
