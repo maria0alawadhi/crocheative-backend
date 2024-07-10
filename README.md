@@ -37,14 +37,14 @@
 ##### Entity Relationship Diagram [Here](https://www.canva.com/design/DAGJmiMBaoQ/b-ww6jXGDT_mDnCM0x5SfQ/edit?utm_content=DAGJmiMBaoQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 ##### Components Hierarchy Diagram [Here](https://www.canva.com/design/DAGJ5I7FmKc/3lBERCmkhgScyOALwObomw/edit?utm_content=DAGJ5I7FmKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 ##### Wireframes [Here](https://www.canva.com/design/DAGJmWeh_O4/bWPaVnBbFH15WtfrqXVsKg/edit)
-<!-- ##### a Draw.io diagram was used to illustrate the Entity Relationship Diagram (ERD) for the job application system project and can be viewed [here](https://www.canva.com/). -->
+
 
 ---
 
 ### **_Credits_**
 
 ##### Markdown Cheatsheet: [GitHub](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
-
 ##### Draw tool :[Canva](https://www.canva.com/)
-
+##### Fonts Style :[fomts.google](https://fonts.google.com/)
+##### Swipper :[here](https://swiperjs.com/get-started)
 ---
